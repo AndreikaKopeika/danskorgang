@@ -7,11 +7,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Russo+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> <!-- Используем основные стили фона и шрифтов -->
-    <link rel="stylesheet" href="products.css"> <!-- Дополнительные стили для этой страницы -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="products.css">
 </head>
 <body>
-    <div class="background-shapes"></div> <!-- Фон как на главной -->
+    <div class="background-shapes"></div>
 
     <div class="container product-container">
         <header class="product-header">
@@ -24,68 +24,86 @@
 
         <div class="product-list">
             <!-- Товар 1 -->
-            <div class="product-item">
+            <div class="product-item"
+                 data-name="@Глава местного совета"
+                 data-price="25₽ на месяц"
+                 data-details="Роль дает доступ к изменению ника, TTS. Поддерживая нас, вы помогаете серверу развиваться и становиться лучше для всех участников GANG'а!">
                 <div class="product-name-price">
                     <span class="role-name role-glava">@Глава местного совета</span>
                     <span class="price">– 25₽ на месяц</span>
                 </div>
-                <div class="product-description">
-                    ✅ [Роль дает доступ к изменению ника, TTS]
+                <div class="product-description-short">
+                    ✅ [Изменение ника, TTS]
                 </div>
             </div>
 
             <!-- Товар 2 -->
-            <div class="product-item">
+            <div class="product-item"
+                 data-name="@Депутат"
+                 data-price="70₽ на месяц"
+                 data-details="Роль дает доступ к реакциям и свойствам предыдущей роли. Ваша поддержка очень важна для поддержания активности и качества нашего сообщества.">
                 <div class="product-name-price">
                     <span class="role-name role-deputat">@Депутат</span>
                     <span class="price">– 70₽ на месяц</span>
                 </div>
-                <div class="product-description">
-                    ✅ [Роль дает доступ к реакциям и свойствам пред. роли]
+                <div class="product-description-short">
+                    ✅ [Реакции, свойства пред. роли]
                 </div>
             </div>
 
             <!-- Товар 3 -->
-            <div class="product-item">
+            <div class="product-item"
+                 data-name="@Мэр"
+                 data-price="120₽ на месяц"
+                 data-details="Роль дает доступ к журналу аудита, голосовым сообщениям и свойствам предыдущих ролей. Каждый вклад помогает нам организовывать ивенты и улучшать инфраструктуру сервера.">
                 <div class="product-name-price">
                     <span class="role-name role-mer">@Мэр</span>
                     <span class="price">– 120₽ на месяц</span>
                 </div>
-                <div class="product-description">
-                    ✅ [Роль дает доступ к журналу аудита, голосовым сообщениям и свойствам пред. ролей]
+                <div class="product-description-short">
+                    ✅ [Журнал аудита, голосовые сообщения, свойства пред. ролей]
                 </div>
             </div>
 
-            <!-- Товар 4 -->
-            <div class="product-item">
+             <!-- Товар 4 -->
+            <div class="product-item"
+                 data-name="@Губернатор"
+                 data-price="200₽ на месяц"
+                 data-details="Роль дает доступ к звуковой панели, отключению режима рации, файлам, приватным веткам и свойствам предыдущих ролей. Станьте ключевой фигурой в нашем GANG'е!">
                 <div class="product-name-price">
                     <span class="role-name role-gubernator">@Губернатор</span>
                     <span class="price">– 200₽ на месяц</span>
                 </div>
-                <div class="product-description">
-                    ✅ [Роль дает доступ к звуковой панели, отключению режима рации, файлам, приватным веткам и свойствам пред. ролей]
+                <div class="product-description-short">
+                    ✅ [Звуковая панель, откл. рации, файлы, приватные ветки, свойства пред. ролей]
                 </div>
             </div>
 
             <!-- Товар 5 -->
-            <div class="product-item">
+            <div class="product-item"
+                 data-name="@Министр"
+                 data-price="300₽ на месяц"
+                 data-details="Роль дает доступ к аналитике, ссылкам, публичным веткам, стримам, приоритетному режиму и свойствам предыдущих ролей. Эксклюзивные возможности для самых преданных членов DanSkorGANG.">
                 <div class="product-name-price">
                     <span class="role-name role-ministr">@Министр</span>
                     <span class="price">– 300₽ на месяц</span>
                 </div>
-                <div class="product-description">
-                    ✅ [Роль дает доступ к аналитике, ссылкам, публичным веткам, стримам, приоритетному режиму и свойствам пред. ролей]
+                <div class="product-description-short">
+                    ✅ [Аналитика, ссылки, публичные ветки, стримы, приоритет, свойства пред. ролей]
                 </div>
             </div>
 
             <!-- Товар 6 -->
-            <div class="product-item">
+            <div class="product-item"
+                 data-name="@Президент"
+                 data-price="550₽ на месяц"
+                 data-details="Высшая роль! Дает доступ к отключению микрофона другим людям, перемещению участников и всем свойствам предыдущих ролей. Это максимальная поддержка и признание в DanSkorGANG. Спасибо!">
                 <div class="product-name-price">
                     <span class="role-name role-prezident">@Президент</span>
                     <span class="price">– 550₽ на месяц</span>
                 </div>
-                <div class="product-description">
-                    ✅ [Роль дает доступ к откл. миркофона другим людям, перемещению участников и свойствам пред. ролей]
+                <div class="product-description-short">
+                    ✅ [Откл. микрофона, перемещение участников, свойства пред. ролей]
                 </div>
             </div>
         </div>
@@ -95,7 +113,29 @@
             <p><span class="dsg-coin-text">DSG COIN</span> можно купить в лс danskor.gg, курс 100 <span class="dsg-coin-text">DSG COIN</span> = 10 ₽</p>
             <p>Разбан и освобождение из тюрьмы также в лс danskor.gg</p>
         </div>
-
     </div>
+
+    <!-- Модальное окно для деталей товара -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h2 id="modalProductName">Название товара</h2>
+            <p class="modal-price" id="modalProductPrice">Цена</p>
+            <p class="modal-details" id="modalProductDetails">Подробное описание товара...</p>
+            <button id="buyProductButton" class="modal-buy-button">Купить</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно для информации о Boosty -->
+    <div id="boostyInfoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h2>Информация о покупке</h2>
+            <p>Для приобретения этого товара, пожалуйста, перейдите на нашу страницу Boosty. Ваша поддержка очень важна для нас!</p>
+            <a href="https://boosty.to/danskorgang" target="_blank" class="modal-action-button">Перейти на Boosty</a>
+        </div>
+    </div>
+
+    <script src="products.js"></script>
 </body>
 </html>
