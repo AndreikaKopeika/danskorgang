@@ -1,12 +1,13 @@
 :root {
-    --primary-color: #ff4081; /* Яркий розовый/малиновый для акцентов */
-    --secondary-color: #8e24aa; /* Фиолетовый для градиента */
-    --text-color: #f0f0f0;
-    --dark-bg: #1a1a2e; /* Темно-синий/фиолетовый фон */
-    --container-bg: rgba(20, 20, 40, 0.85); /* Полупрозрачный для контейнера */
+    --primary-color: #ff4081;
+    --primary-color-rgb: 255, 64, 129; /* Для использования в rgba() */
+    --secondary-color: #822FAF; /* Чуть измененный фиолетовый для градиента */
+    --text-color: #e0e0e0; /* Чуть светлее для лучшего контраста на темном */
+    --dark-bg: #161625; /* Немного другой оттенок темно-синего */
+    --container-bg: rgba(25, 25, 45, 0.8); /* Чуть светлее и менее насыщенный фон контейнера */
     --button-hover: #f50057;
     --font-main: 'Montserrat', sans-serif;
-    --font-header: 'Russo One', sans-serif; /* Более "игровой" шрифт для заголовка */
+    --font-header: 'Russo One', sans-serif;
 }
 
 * {
@@ -25,8 +26,9 @@ body {
     justify-content: center;
     min-height: 100vh;
     text-align: center;
-    overflow: hidden; /* Важно для фона */
-    position: relative; /* Для позиционирования фоновых элементов */
+    overflow-x: hidden; /* Предотвращает горизонтальный скролл если фон широкий */
+    overflow-y: auto; /* Разрешает вертикальный скролл если контент длинный */
+    position: relative;
     padding: 20px;
 }
 
@@ -38,9 +40,9 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    background: linear-gradient(-45deg, var(--secondary-color), var(--primary-color), #23a6d5, #23d5ab);
+    background: linear-gradient(-35deg, var(--secondary-color), var(--primary-color), #1c8ac0, #1cbda0);
     background-size: 400% 400%;
-    animation: gradientBG 20s ease infinite;
+    animation: gradientBG 25s ease infinite;
 }
 
 @keyframes gradientBG {
@@ -49,101 +51,107 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* Можно добавить еще CSS-анимацию для "плавающих" фигур, если JS не используется */
 .background-shapes::before,
 .background-shapes::after {
     content: '';
     position: absolute;
     border-radius: 50%;
-    opacity: 0.1;
-    animation: float 15s infinite ease-in-out;
+    opacity: 0.07;
+    animation: float 20s infinite ease-in-out;
 }
 
 .background-shapes::before {
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
-    top: 10%;
-    left: 10%;
-    animation-duration: 18s; /* Разная скорость для разнообразия */
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(var(--primary-color-rgb), 0.5) 0%, transparent 70%);
+    top: 5%;
+    left: 8%;
+    animation-duration: 24s;
 }
 
 .background-shapes::after {
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%);
-    bottom: 15%;
-    right: 15%;
-    animation-delay: -5s; /* Начать с другой точки анимации */
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(130, 47, 175, 0.5) 0%, transparent 70%);
+    bottom: 10%;
+    right: 12%;
+    animation-delay: -7s;
 }
 
 @keyframes float {
-    0% { transform: translateY(0px) translateX(0px) scale(1); }
-    25% { transform: translateY(-20px) translateX(15px) scale(1.05); }
-    50% { transform: translateY(10px) translateX(-10px) scale(0.95); }
-    75% { transform: translateY(-15px) translateX(20px) scale(1.02); }
-    100% { transform: translateY(0px) translateX(0px) scale(1); }
+    0% { transform: translateY(0px) translateX(0px) scale(1) rotate(0deg); }
+    25% { transform: translateY(-25px) translateX(20px) scale(1.03) rotate(15deg); }
+    50% { transform: translateY(15px) translateX(-15px) scale(0.97) rotate(-10deg); }
+    75% { transform: translateY(-20px) translateX(25px) scale(1.02) rotate(10deg); }
+    100% { transform: translateY(0px) translateX(0px) scale(1) rotate(0deg); }
 }
 
 /* --- Основной контейнер --- */
 .container {
     background-color: var(--container-bg);
     padding: 30px 40px;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px); /* Эффект "матового стекла" */
-    -webkit-backdrop-filter: blur(10px); /* Для Safari */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    max-width: 600px;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    max-width: 580px;
     width: 100%;
     z-index: 1;
+    transition: transform 0.1s ease-out; /* Для параллакса */
+    margin-top: 20px; /* Отступ сверху, если контент длинный */
+    margin-bottom: 20px; /* Отступ снизу */
 }
 
 /* --- Заголовки и текст --- */
 .gang-name {
     font-family: var(--font-header);
-    font-size: 3em;
+    font-size: 2.8em;
     color: var(--primary-color);
-    text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 2px 2px 2px rgba(0,0,0,0.7);
-    margin-bottom: 10px;
-    letter-spacing: 1px;
+    text-shadow:
+        0 0 7px rgba(var(--primary-color-rgb), 0.5),
+        0 0 12px rgba(var(--primary-color-rgb), 0.3),
+        1px 1px 1px rgba(0,0,0,0.3);
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
 }
 
 .subtitle {
-    font-size: 1.1em;
-    color: #ccc;
-    margin-bottom: 30px;
+    font-size: 1.05em;
+    color: #c0c0d8;
+    margin-bottom: 35px;
+    font-weight: 500;
 }
 
 .cta-section {
-    margin-bottom: 35px;
+    margin-bottom: 38px;
 }
 
 .cta-main-text {
-    font-size: 2.5em;
+    font-size: 2.3em;
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     line-height: 1.2;
 }
 
 .cta-sub-text {
-    font-size: 1.6em;
+    font-size: 1.45em;
     font-weight: 600;
-    color: #b0b0e0; /* Светло-лавандовый для контраста */
-    min-height: 1.5em; /* Предотвращает "прыгание" при смене текста */
+    color: #a8a8d8;
+    min-height: 1.5em;
     position: relative;
 }
 
 #rotating-text {
-    display: inline-block; /* Важно для плавного перехода */
-    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    display: inline-block;
+    transition: opacity 0.35s ease-in-out, transform 0.35s ease-in-out;
     opacity: 1;
     transform: translateY(0);
 }
 
 #rotating-text.fade-out {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-8px);
 }
 #rotating-text.fade-in {
     opacity: 1;
@@ -151,94 +159,8 @@ body {
 }
 
 
-/* --- Кнопка Boosty --- */
+/* --- Кнопки --- */
 .boosty-button {
-    display: inline-flex; /* Для выравнивания иконки и текста */
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(45deg, var(--primary-color), var(--button-hover));
-    color: white;
-    padding: 18px 35px;
-    text-decoration: none;
-    font-size: 1.3em;
-    font-weight: 700;
-    font-family: var(--font-main); /* Используем основной шрифт для кнопки */
-    border-radius: 50px; /* "Плавная" кнопка */
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, background-size 0.4s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3), 0 0 20px var(--primary-color,0.3);
-    border: none;
-    cursor: pointer;
-    background-size: 100% 100%;
-}
-
-.boosty-button:hover, .boosty-button:focus {
-    background-size: 150% 150%; /* Эффект "приближения" градиента */
-    transform: translateY(-5px) scale(1.03); /* "Подпрыгивание" */
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4), 0 0 30px var(--primary-color,0.5);
-    outline: none; /* Убираем стандартный outline при фокусе */
-}
-
-.boosty-button:active {
-    transform: translateY(-2px) scale(0.98);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3), 0 0 15px var(--primary-color,0.4);
-}
-
-/* --- Ссылка на Discord --- */
-.discord-link {
-    margin-top: 30px;
-    font-size: 0.9em;
-    color: #aaa;
-}
-
-.discord-link a {
-    color: #7289DA; /* Официальный цвет Discord */
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.2s ease, text-shadow 0.2s ease;
-}
-
-.discord-link a:hover {
-    color: #8ea1e1;
-    text-decoration: underline;
-    text-shadow: 0 0 5px #7289DA;
-}
-
-/* --- Адаптивность --- */
-@media (max-width: 768px) {
-    .gang-name { font-size: 2.5em; }
-    .cta-main-text { font-size: 2em; }
-    .cta-sub-text { font-size: 1.3em; }
-    .boosty-button { padding: 15px 30px; font-size: 1.1em; }
-    .container { padding: 25px 30px; }
-    .background-shapes::before,
-    .background-shapes::after { /* Уменьшим или уберем фигуры на мобилках для производительности */
-        width: 150px;
-        height: 150px;
-    }
-}
-
-@media (max-width: 480px) {
-    body { padding: 15px; }
-    .gang-name { font-size: 2em; }
-    .subtitle { font-size: 1em; margin-bottom: 20px;}
-    .cta-main-text { font-size: 1.7em; }
-    .cta-sub-text { font-size: 1.1em; }
-    .boosty-button {
-        padding: 12px 25px;
-        font-size: 1em;
-        width: 90%; /* Кнопка на всю ширину почти */
-    }
-    .container {
-        padding: 20px;
-        margin: 0 10px; /* Небольшие отступы по бокам */
-    }
-    .discord-link { font-size: 0.8em; }
-}
-
-/* ... (все ваши предыдущие стили) ... */
-
-/* Обновления для кнопок */
-.boosty-button { /* Общие стили для обеих кнопок */
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -254,32 +176,38 @@ body {
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    margin-top: 15px; /* Добавлен отступ сверху для разделения кнопок */
-    width: 80%; /* Для лучшего вида на мобильных, когда кнопки одна под другой */
-    max-width: 320px; /* Максимальная ширина кнопки */
+    width: 80%;
+    max-width: 320px;
 }
 
-.boosty-button.primary-action { /* Стиль для основной кнопки Boosty */
+.boosty-button svg {
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
+    width: 20px;
+    height: 20px;
+}
+
+.boosty-button.primary-action {
     background: linear-gradient(50deg, var(--primary-color), var(--button-hover));
     box-shadow:
         0 3px 10px rgba(0,0,0,0.15),
         0 0 8px rgba(var(--primary-color-rgb),0.1),
         inset 0 1px 0px rgba(255,255,255,0.08);
+    margin-top: 15px; /* Отступ от текста "Задонать" */
 }
 
-.boosty-button.secondary-action { /* Стиль для кнопки "Товары" */
+.boosty-button.secondary-action {
     background: transparent;
     border: 2px solid var(--primary-color);
     color: var(--primary-color);
-    box-shadow: none; /* Убираем тень, если не нужна */
+    box-shadow: none;
+    margin-top: 25px; /* Увеличенный отступ между кнопками */
 }
 
 .boosty-button.secondary-action svg path {
-    fill: var(--primary-color); /* Цвет иконки для второй кнопки */
+    fill: var(--primary-color);
 }
 
-
-/* Блик на кнопке (применяется к обеим кнопкам) */
+/* Блик на кнопке */
 .boosty-button::before {
     content: "";
     position: absolute;
@@ -301,7 +229,7 @@ body {
     left: 150%;
 }
 
-/* Эффекты наведения для обеих кнопок */
+/* Эффекты наведения для кнопок */
 .boosty-button:hover, .boosty-button:focus {
     transform: translateY(-4px) scale(1.02);
     outline: none;
@@ -316,15 +244,14 @@ body {
 }
 
 .boosty-button.secondary-action:hover, .boosty-button.secondary-action:focus {
-    background-color: rgba(var(--primary-color-rgb), 0.1); /* Легкий фон при наведении */
-    color: white; /* Текст становится белым */
-    border-color: var(--button-hover); /* Граница становится ярче */
+    background-color: rgba(var(--primary-color-rgb), 0.1);
+    color: white;
+    border-color: var(--button-hover);
 }
 .boosty-button.secondary-action:hover svg path,
 .boosty-button.secondary-action:focus svg path {
-    fill: white; /* Иконка становится белой при наведении */
+    fill: white;
 }
-
 
 .boosty-button:active {
     transform: translateY(-1px) scale(0.99);
@@ -339,15 +266,122 @@ body {
     background-color: rgba(var(--primary-color-rgb), 0.2);
 }
 
+/* --- Ссылка на Discord --- */
+footer { /* Добавляем отступ для всего футера, чтобы он не прилипал к кнопкам */
+    margin-top: 25px;
+}
+.discord-link {
+    /* margin-top: 35px; Убрали, так как отступ теперь у общего footer */
+    font-size: 0.85em;
+    color: #9999b0;
+}
 
-/* Адаптация для кнопок */
-@media (max-width: 480px) {
-    .boosty-button {
-        padding: 14px 25px; /* Чуть меньше паддинг на очень маленьких экранах */
-        font-size: 1em;
-        width: 90%; /* Чтобы кнопки занимали больше места */
+.discord-link a {
+    color: #7289DA;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease, text-shadow 0.2s ease, border-bottom-color 0.2s ease;
+    padding-bottom: 1px;
+    border-bottom: 1px solid transparent;
+}
+
+.discord-link a:hover {
+    color: #8ea1e1;
+    text-shadow: 0 0 4px rgba(114, 137, 218, 0.5);
+    border-bottom-color: #8ea1e1;
+}
+
+/* --- Стили для футера автора --- */
+.site-author {
+    margin-top: 30px; /* Отступ от ссылки на Discord сервер */
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.85em;
+    color: #a0a0c0;
+}
+
+.site-author p {
+    margin-bottom: 10px;
+}
+
+.site-author .author-name {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.site-author .author-name:hover {
+    text-decoration: underline;
+}
+
+.author-socials a {
+    color: #b0b0d0;
+    font-size: 1.5em;
+    margin: 0 10px;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.author-socials a:hover {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+
+/* --- Адаптивность --- */
+@media (max-width: 768px) {
+    .container {
+        padding: 25px 30px;
+        max-width: 90%;
     }
-     main .boosty-button + .boosty-button { /* Отступ только если есть вторая кнопка */
-        margin-top: 15px;
+    .gang-name { font-size: 2.4em; }
+    .cta-main-text { font-size: 1.9em; }
+    .cta-sub-text { font-size: 1.25em; }
+    .boosty-button {
+        padding: 14px 28px;
+        font-size: 1.1em;
+    }
+    .background-shapes::before,
+    .background-shapes::after {
+        width: 200px;
+        height: 200px;
+        opacity: 0.05;
+    }
+}
+
+@media (max-width: 480px) {
+    body { padding: 10px; }
+    .container {
+        padding: 20px 15px;
+        margin: 10px 5px; /* Небольшие отступы по бокам и сверху/снизу */
+        width: calc(100% - 10px); /* Учитываем padding body */
+    }
+    .gang-name { font-size: 1.9em; }
+    .subtitle { font-size: 0.95em; margin-bottom: 25px;}
+    .cta-main-text { font-size: 1.6em; }
+    .cta-sub-text { font-size: 1.05em; }
+
+    .boosty-button {
+        padding: 12px 22px;
+        font-size: 1em;
+        width: 90%;
+    }
+    .boosty-button.primary-action {
+        margin-top: 15px; /* Отступ для первой кнопки на мобильных */
+    }
+    .boosty-button.secondary-action {
+        margin-top: 20px; /* Отступ между кнопками на мобильных */
+    }
+    footer {
+        margin-top: 20px;
+    }
+    .discord-link { font-size: 0.8em; }
+    .site-author {
+        margin-top: 25px;
+        padding-top: 15px;
+        font-size: 0.8em;
+    }
+    .author-socials a {
+        font-size: 1.3em;
+        margin: 0 8px;
     }
 }
