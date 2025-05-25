@@ -1,0 +1,197 @@
+/* products.css */
+
+/* Наследуем некоторые стили из style.css для body, шрифтов и фона */
+/* .container уже стилизован в style.css, но мы добавим специфичный класс */
+
+.product-container {
+    max-width: 800px; /* Контейнер для товаров может быть шире */
+    text-align: left; /* Текст внутри товаров по левому краю */
+    padding: 20px 30px;
+}
+
+.product-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Кнопка назад слева, заголовок справа/по центру */
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 20px;
+}
+
+.product-header h1 {
+    font-family: var(--font-header);
+    font-size: 2.2em;
+    color: var(--primary-color);
+    text-shadow: 0 0 7px rgba(var(--primary-color-rgb), 0.4);
+    margin: 0; /* Убираем стандартный отступ */
+    flex-grow: 1; /* Чтобы заголовок занимал доступное место */
+    text-align: center; /* Центрируем заголовок */
+    position: relative; /* Для позиционирования логотипа */
+}
+.dsg-coin-logo {
+    font-size: 0.3em; /* Размер текста логотипа */
+    font-family: 'Arial', sans-serif; /* Простой шрифт для лого */
+    font-weight: bold;
+    color: #fff;
+    background-color: #7289DA; /* Цвет Discord */
+    border-radius: 50%;
+    padding: 5px 3px;
+    line-height: 0.9;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle; /* Выравнивание с текстом "Товары" */
+    margin-left: 10px;
+    width: 40px; /* Фиксированная ширина и высота для круга */
+    height: 40px;
+    box-sizing: border-box; /* Чтобы padding не влиял на размер */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.back-button svg {
+    margin-right: 8px;
+}
+
+.back-button:hover {
+    background-color: rgba(var(--primary-color-rgb), 0.15);
+    color: var(--primary-color);
+}
+
+.product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Пространство между товарами */
+}
+
+.product-item {
+    background-color: rgba(30, 30, 55, 0.7); /* Чуть темнее фон для элементов */
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.product-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.product-name-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap; /* Для переноса на маленьких экранах */
+}
+
+.role-name {
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.price {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #c0c0d8;
+    white-space: nowrap; /* Чтобы цена не переносилась */
+    margin-left: 10px; /* Отступ от названия роли */
+}
+
+.product-description {
+    font-size: 0.95em;
+    color: #b0b0cc;
+    line-height: 1.5;
+}
+
+.product-description .checkmark { /* Если будете использовать span для галочки */
+    color: #4CAF50; /* Зеленый цвет для галочки */
+    margin-right: 5px;
+}
+
+/* Цвета для ролей */
+.role-glava { color: #2ecc71; } /* Зеленый */
+.role-deputat { color: #9b59b6; } /* Фиолетовый */
+.role-mer { color: #f39c12; } /* Оранжевый */
+.role-gubernator { color: #00e676; } /* Ярко-зеленый */
+.role-ministr { color: #3498db; } /* Синий */
+.role-prezident { color: #e91e63; } /* Розовый */
+
+
+.product-footer-info {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    font-size: 0.9em;
+    color: #a0a0c0;
+}
+
+.product-footer-info p {
+    margin-bottom: 10px;
+}
+
+.product-footer-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+.product-footer-info a:hover {
+    text-decoration: underline;
+}
+
+.dsg-coin-text { /* Для выделения "DSG COIN" в тексте */
+    font-weight: bold;
+    color: #7289DA; /* Цвет Discord для акцента */
+}
+
+
+@media (max-width: 600px) {
+    .product-container {
+        padding: 15px;
+    }
+    .product-header h1 {
+        font-size: 1.8em;
+    }
+    .dsg-coin-logo {
+        width: 35px;
+        height: 35px;
+        font-size: 0.25em;
+    }
+    .role-name {
+        font-size: 1.1em;
+    }
+    .price {
+        font-size: 1em;
+    }
+    .product-name-price {
+        flex-direction: column; /* Название роли и цена друг под другом */
+        align-items: flex-start;
+    }
+    .price {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+    .back-button {
+        font-size: 0.9em;
+        padding: 6px 10px;
+    }
+    .back-button svg {
+        width: 20px;
+        height: 20px;
+    }
+}
