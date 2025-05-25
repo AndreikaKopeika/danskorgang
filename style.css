@@ -1,0 +1,236 @@
+:root {
+    --primary-color: #ff4081; /* Яркий розовый/малиновый для акцентов */
+    --secondary-color: #8e24aa; /* Фиолетовый для градиента */
+    --text-color: #f0f0f0;
+    --dark-bg: #1a1a2e; /* Темно-синий/фиолетовый фон */
+    --container-bg: rgba(20, 20, 40, 0.85); /* Полупрозрачный для контейнера */
+    --button-hover: #f50057;
+    --font-main: 'Montserrat', sans-serif;
+    --font-header: 'Russo One', sans-serif; /* Более "игровой" шрифт для заголовка */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-color);
+    background-color: var(--dark-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    overflow: hidden; /* Важно для фона */
+    position: relative; /* Для позиционирования фоновых элементов */
+    padding: 20px;
+}
+
+/* --- Динамический фон --- */
+.background-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(-45deg, var(--secondary-color), var(--primary-color), #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientBG 20s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Можно добавить еще CSS-анимацию для "плавающих" фигур, если JS не используется */
+.background-shapes::before,
+.background-shapes::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
+    animation: float 15s infinite ease-in-out;
+}
+
+.background-shapes::before {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+    top: 10%;
+    left: 10%;
+    animation-duration: 18s; /* Разная скорость для разнообразия */
+}
+
+.background-shapes::after {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%);
+    bottom: 15%;
+    right: 15%;
+    animation-delay: -5s; /* Начать с другой точки анимации */
+}
+
+@keyframes float {
+    0% { transform: translateY(0px) translateX(0px) scale(1); }
+    25% { transform: translateY(-20px) translateX(15px) scale(1.05); }
+    50% { transform: translateY(10px) translateX(-10px) scale(0.95); }
+    75% { transform: translateY(-15px) translateX(20px) scale(1.02); }
+    100% { transform: translateY(0px) translateX(0px) scale(1); }
+}
+
+/* --- Основной контейнер --- */
+.container {
+    background-color: var(--container-bg);
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px); /* Эффект "матового стекла" */
+    -webkit-backdrop-filter: blur(10px); /* Для Safari */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 600px;
+    width: 100%;
+    z-index: 1;
+}
+
+/* --- Заголовки и текст --- */
+.gang-name {
+    font-family: var(--font-header);
+    font-size: 3em;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 2px 2px 2px rgba(0,0,0,0.7);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    font-size: 1.1em;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.cta-section {
+    margin-bottom: 35px;
+}
+
+.cta-main-text {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 5px;
+    line-height: 1.2;
+}
+
+.cta-sub-text {
+    font-size: 1.6em;
+    font-weight: 600;
+    color: #b0b0e0; /* Светло-лавандовый для контраста */
+    min-height: 1.5em; /* Предотвращает "прыгание" при смене текста */
+    position: relative;
+}
+
+#rotating-text {
+    display: inline-block; /* Важно для плавного перехода */
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#rotating-text.fade-out {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+#rotating-text.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* --- Кнопка Boosty --- */
+.boosty-button {
+    display: inline-flex; /* Для выравнивания иконки и текста */
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, var(--primary-color), var(--button-hover));
+    color: white;
+    padding: 18px 35px;
+    text-decoration: none;
+    font-size: 1.3em;
+    font-weight: 700;
+    font-family: var(--font-main); /* Используем основной шрифт для кнопки */
+    border-radius: 50px; /* "Плавная" кнопка */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, background-size 0.4s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3), 0 0 20px var(--primary-color,0.3);
+    border: none;
+    cursor: pointer;
+    background-size: 100% 100%;
+}
+
+.boosty-button:hover, .boosty-button:focus {
+    background-size: 150% 150%; /* Эффект "приближения" градиента */
+    transform: translateY(-5px) scale(1.03); /* "Подпрыгивание" */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4), 0 0 30px var(--primary-color,0.5);
+    outline: none; /* Убираем стандартный outline при фокусе */
+}
+
+.boosty-button:active {
+    transform: translateY(-2px) scale(0.98);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3), 0 0 15px var(--primary-color,0.4);
+}
+
+/* --- Ссылка на Discord --- */
+.discord-link {
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+.discord-link a {
+    color: #7289DA; /* Официальный цвет Discord */
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.discord-link a:hover {
+    color: #8ea1e1;
+    text-decoration: underline;
+    text-shadow: 0 0 5px #7289DA;
+}
+
+/* --- Адаптивность --- */
+@media (max-width: 768px) {
+    .gang-name { font-size: 2.5em; }
+    .cta-main-text { font-size: 2em; }
+    .cta-sub-text { font-size: 1.3em; }
+    .boosty-button { padding: 15px 30px; font-size: 1.1em; }
+    .container { padding: 25px 30px; }
+    .background-shapes::before,
+    .background-shapes::after { /* Уменьшим или уберем фигуры на мобилках для производительности */
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    body { padding: 15px; }
+    .gang-name { font-size: 2em; }
+    .subtitle { font-size: 1em; margin-bottom: 20px;}
+    .cta-main-text { font-size: 1.7em; }
+    .cta-sub-text { font-size: 1.1em; }
+    .boosty-button {
+        padding: 12px 25px;
+        font-size: 1em;
+        width: 90%; /* Кнопка на всю ширину почти */
+    }
+    .container {
+        padding: 20px;
+        margin: 0 10px; /* Небольшие отступы по бокам */
+    }
+    .discord-link { font-size: 0.8em; }
+}
