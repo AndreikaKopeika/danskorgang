@@ -3,16 +3,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const words = [
         "Легко!",
         "Быстро!",
-        "Анонимно!",
         "На развитие!",
         "Для GANG'а!",
-        "С душой <3"
+        "От души!",
+        "С любовью <3" // Немного измененные фразы
     ];
     let currentIndex = 0;
-    const changeInterval = 2500; // мс, как часто менять текст
-    const animationDuration = 400; // мс, должно совпадать с CSS transition duration
+    const changeInterval = 2300; // Чуть быстрее смена текста
+    const animationDuration = 350; // Должно совпадать с CSS transition duration для #rotating-text
 
     function changeText() {
+        if (!rotatingTextElement) return; // Добавлена проверка
         rotatingTextElement.classList.remove('fade-in');
         rotatingTextElement.classList.add('fade-out');
 
@@ -24,31 +25,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }, animationDuration);
     }
 
-    // Устанавливаем начальный текст и класс для первой анимации
     if (rotatingTextElement) {
         rotatingTextElement.textContent = words[currentIndex];
-        rotatingTextElement.classList.add('fade-in'); // Чтобы первый текст тоже появился плавно
+        rotatingTextElement.classList.add('fade-in');
         setInterval(changeText, changeInterval);
     }
 
-    // Небольшой параллакс эффект для контейнера при движении мыши (опционально)
     const container = document.querySelector('.container');
-    if (container && window.innerWidth > 768) { // Только на десктопах
+    if (container && window.innerWidth > 768) {
         document.body.addEventListener('mousemove', (e) => {
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 25; // Делитель управляет "силой" эффекта
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-            container.style.transform = `rotateY(${xAxis}deg) rotateX(${-yAxis}deg) translateZ(5px)`;
-            // Добавим небольшой сдвиг и тени для фона, если хотите
-            // document.querySelector('.background-shapes').style.transform = `translateX(${-xAxis/2}px) translateY(${-yAxis/2}px)`;
+            // Уменьшаем силу параллакс-эффекта (делитель больше)
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 55; // Было /25 или /45
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 55; // Было /25 или /45
+            container.style.transform = `rotateY(${xAxis}deg) rotateX(${-yAxis}deg) translateZ(3px)`; // Уменьшен translateZ
         });
         document.body.addEventListener('mouseleave', () => {
             container.style.transform = `rotateY(0deg) rotateX(0deg) translateZ(0px)`;
-            container.style.transition = 'transform 0.5s ease';
-            // document.querySelector('.background-shapes').style.transform = 'translateX(0px) translateY(0px)';
+            // Плавный возврат transition уже есть в .container
         });
-         // Сброс transition после того как мышь ушла, чтобы движение было мгновенным
-        document.body.addEventListener('mouseenter', () => {
-            container.style.transition = 'none';
-        });
+        // Убраны mouseenter/mouseleave для transition='none', т.к. transition в .container теперь короткий
     }
 });
