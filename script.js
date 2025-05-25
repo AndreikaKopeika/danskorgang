@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
         "На развитие!",
         "Для GANG'а!",
         "От души!",
-        "С любовью <3" // Немного измененные фразы
+        "Просто так", // Немного измененные фразы
+        "По приколу",
+        "По тому что DanSkor захотел"
     ];
     let currentIndex = 0;
     const changeInterval = 2300; // Чуть быстрее смена текста
