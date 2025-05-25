@@ -7,11 +7,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Russo+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="products.css">
+    <link rel="stylesheet" href="style.css"> <!-- Общие стили с главной страницы -->
+    <link rel="stylesheet" href="products.css"> <!-- Стили для страницы товаров -->
 </head>
 <body>
-    <div class="background-shapes"></div>
+    <div class="background-shapes"></div> <!-- Фон как на главной -->
 
     <div class="container product-container">
         <header class="product-header">
@@ -27,6 +27,7 @@
             <div class="product-item"
                  data-name="@Глава местного совета"
                  data-price="25₽ на месяц"
+                 data-color-class="role-glava"
                  data-details="Роль дает доступ к изменению ника, TTS. Поддерживая нас, вы помогаете серверу развиваться и становиться лучше для всех участников GANG'а!">
                 <div class="product-name-price">
                     <span class="role-name role-glava">@Глава местного совета</span>
@@ -41,6 +42,7 @@
             <div class="product-item"
                  data-name="@Депутат"
                  data-price="70₽ на месяц"
+                 data-color-class="role-deputat"
                  data-details="Роль дает доступ к реакциям и свойствам предыдущей роли. Ваша поддержка очень важна для поддержания активности и качества нашего сообщества.">
                 <div class="product-name-price">
                     <span class="role-name role-deputat">@Депутат</span>
@@ -55,6 +57,7 @@
             <div class="product-item"
                  data-name="@Мэр"
                  data-price="120₽ на месяц"
+                 data-color-class="role-mer"
                  data-details="Роль дает доступ к журналу аудита, голосовым сообщениям и свойствам предыдущих ролей. Каждый вклад помогает нам организовывать ивенты и улучшать инфраструктуру сервера.">
                 <div class="product-name-price">
                     <span class="role-name role-mer">@Мэр</span>
@@ -69,6 +72,7 @@
             <div class="product-item"
                  data-name="@Губернатор"
                  data-price="200₽ на месяц"
+                 data-color-class="role-gubernator"
                  data-details="Роль дает доступ к звуковой панели, отключению режима рации, файлам, приватным веткам и свойствам предыдущих ролей. Станьте ключевой фигурой в нашем GANG'е!">
                 <div class="product-name-price">
                     <span class="role-name role-gubernator">@Губернатор</span>
@@ -83,6 +87,7 @@
             <div class="product-item"
                  data-name="@Министр"
                  data-price="300₽ на месяц"
+                 data-color-class="role-ministr"
                  data-details="Роль дает доступ к аналитике, ссылкам, публичным веткам, стримам, приоритетному режиму и свойствам предыдущих ролей. Эксклюзивные возможности для самых преданных членов DanSkorGANG.">
                 <div class="product-name-price">
                     <span class="role-name role-ministr">@Министр</span>
@@ -97,6 +102,7 @@
             <div class="product-item"
                  data-name="@Президент"
                  data-price="550₽ на месяц"
+                 data-color-class="role-prezident"
                  data-details="Высшая роль! Дает доступ к отключению микрофона другим людям, перемещению участников и всем свойствам предыдущих ролей. Это максимальная поддержка и признание в DanSkorGANG. Спасибо!">
                 <div class="product-name-price">
                     <span class="role-name role-prezident">@Президент</span>
@@ -118,21 +124,36 @@
     <!-- Модальное окно для деталей товара -->
     <div id="productModal" class="modal">
         <div class="modal-content">
-            <span class="close-button">×</span>
-            <h2 id="modalProductName">Название товара</h2>
-            <p class="modal-price" id="modalProductPrice">Цена</p>
-            <p class="modal-details" id="modalProductDetails">Подробное описание товара...</p>
-            <button id="buyProductButton" class="modal-buy-button">Купить</button>
+            <button class="close-button" aria-label="Закрыть">×</button>
+            <div class="modal-header">
+                <h2 id="modalProductName" class="modal-product-name-colored">Название товара</h2>
+                <p class="modal-price" id="modalProductPrice">Цена</p>
+            </div>
+            <div class="modal-body">
+                <p class="modal-details" id="modalProductDetails">Подробное описание товара...</p>
+            </div>
+            <div class="modal-footer">
+                <button id="buyProductButton" class="modal-buy-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="margin-right: 8px; vertical-align: middle;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" opacity=".3"/><path d="M11 7h2v6h-2zm0 8h2v2h-2z"/></svg> <!-- Иконка для кнопки (опционально) -->
+                    Купить
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- Модальное окно для информации о Boosty -->
     <div id="boostyInfoModal" class="modal">
         <div class="modal-content">
-            <span class="close-button">×</span>
-            <h2>Информация о покупке</h2>
-            <p>Для приобретения этого товара, пожалуйста, перейдите на нашу страницу Boosty. Ваша поддержка очень важна для нас!</p>
-            <a href="https://boosty.to/danskorgang" target="_blank" class="modal-action-button">Перейти на Boosty</a>
+            <button class="close-button" aria-label="Закрыть">×</button>
+            <div class="modal-header">
+                 <h2>Информация о покупке</h2>
+            </div>
+            <div class="modal-body">
+                <p>Для приобретения этого товара, пожалуйста, перейдите на нашу страницу Boosty. Ваша поддержка очень важна для нас!</p>
+            </div>
+            <div class="modal-footer">
+                 <a href="https://boosty.to/danskorgang" target="_blank" class="modal-action-button">Перейти на Boosty</a>
+            </div>
         </div>
     </div>
 
