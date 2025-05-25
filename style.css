@@ -26,8 +26,8 @@ body {
     justify-content: center;
     min-height: 100vh;
     text-align: center;
-    overflow-x: hidden; /* Предотвращает горизонтальный скролл если фон широкий */
-    overflow-y: auto; /* Разрешает вертикальный скролл если контент длинный */
+    overflow-x: hidden;
+    overflow-y: auto;
     position: relative;
     padding: 20px;
 }
@@ -98,9 +98,9 @@ body {
     max-width: 580px;
     width: 100%;
     z-index: 1;
-    transition: transform 0.1s ease-out; /* Для параллакса */
-    margin-top: 20px; /* Отступ сверху, если контент длинный */
-    margin-bottom: 20px; /* Отступ снизу */
+    transition: transform 0.1s ease-out;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 /* --- Заголовки и текст --- */
@@ -161,11 +161,11 @@ body {
 
 /* --- Кнопки --- */
 .boosty-button {
-    display: inline-flex;
+    display: inline-flex; /* Важно для выравнивания иконок и текста */
     align-items: center;
     justify-content: center;
     color: white;
-    padding: 16px 32px;
+    padding: 14px 28px; /* Немного уменьшил паддинги, т.к. иконки стали больше */
     text-decoration: none;
     font-size: 1.2em;
     font-weight: 600;
@@ -177,14 +177,32 @@ body {
     position: relative;
     overflow: hidden;
     width: 80%;
-    max-width: 320px;
+    max-width: 350px; /* Можно чуть увеличить макс. ширину из-за двух иконок */
 }
 
-.boosty-button svg {
-    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
-    width: 20px;
-    height: 20px;
+.boosty-button .button-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0; /* Чтобы SVG не добавлял лишнюю высоту */
 }
+
+.boosty-button .button-icon.left-heart {
+    margin-right: 10px; /* Отступ от текста */
+}
+
+.boosty-button .button-icon.right-heart {
+    margin-left: 10px; /* Отступ от текста */
+}
+
+.boosty-button .button-icon svg {
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
+    /* width и height заданы в HTML, здесь можно переопределить если нужно */
+}
+.boosty-button .button-text {
+    white-space: nowrap; /* Предотвращаем перенос текста кнопки */
+}
+
 
 .boosty-button.primary-action {
     background: linear-gradient(50deg, var(--primary-color), var(--button-hover));
@@ -192,7 +210,7 @@ body {
         0 3px 10px rgba(0,0,0,0.15),
         0 0 8px rgba(var(--primary-color-rgb),0.1),
         inset 0 1px 0px rgba(255,255,255,0.08);
-    margin-top: 15px; /* Отступ от текста "Задонать" */
+    margin-top: 15px;
 }
 
 .boosty-button.secondary-action {
@@ -200,12 +218,10 @@ body {
     border: 2px solid var(--primary-color);
     color: var(--primary-color);
     box-shadow: none;
-    margin-top: 25px; /* Увеличенный отступ между кнопками */
+    margin-top: 25px;
+    /* SVG иконки удалены, поэтому стили для SVG .secondary-action не нужны */
 }
 
-.boosty-button.secondary-action svg path {
-    fill: var(--primary-color);
-}
 
 /* Блик на кнопке */
 .boosty-button::before {
@@ -245,13 +261,11 @@ body {
 
 .boosty-button.secondary-action:hover, .boosty-button.secondary-action:focus {
     background-color: rgba(var(--primary-color-rgb), 0.1);
-    color: white;
+    color: white; /* Текст кнопки становится белым */
     border-color: var(--button-hover);
 }
-.boosty-button.secondary-action:hover svg path,
-.boosty-button.secondary-action:focus svg path {
-    fill: white;
-}
+/* Стили для SVG иконки на .secondary-action:hover удалены, так как иконки нет */
+
 
 .boosty-button:active {
     transform: translateY(-1px) scale(0.99);
@@ -267,11 +281,10 @@ body {
 }
 
 /* --- Ссылка на Discord --- */
-footer { /* Добавляем отступ для всего футера, чтобы он не прилипал к кнопкам */
+footer {
     margin-top: 25px;
 }
 .discord-link {
-    /* margin-top: 35px; Убрали, так как отступ теперь у общего footer */
     font-size: 0.85em;
     color: #9999b0;
 }
@@ -293,7 +306,7 @@ footer { /* Добавляем отступ для всего футера, чт
 
 /* --- Стили для футера автора --- */
 .site-author {
-    margin-top: 30px; /* Отступ от ссылки на Discord сервер */
+    margin-top: 30px;
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 0.85em;
@@ -337,9 +350,19 @@ footer { /* Добавляем отступ для всего футера, чт
     .cta-main-text { font-size: 1.9em; }
     .cta-sub-text { font-size: 1.25em; }
     .boosty-button {
-        padding: 14px 28px;
+        padding: 12px 24px; /* Скорректированы паддинги */
         font-size: 1.1em;
+        max-width: 320px;
     }
+    .boosty-button .button-icon.left-heart { margin-right: 8px; }
+    .boosty-button .button-icon.right-heart { margin-left: 8px; }
+    /* SVG иконки останутся того же размера, что задан в HTML (28px), можно уменьшить здесь если нужно */
+    .boosty-button .button-icon svg {
+        width: 24px; /* Пример уменьшения на мобильных */
+        height: 24px;
+    }
+
+
     .background-shapes::before,
     .background-shapes::after {
         width: 200px;
@@ -352,8 +375,8 @@ footer { /* Добавляем отступ для всего футера, чт
     body { padding: 10px; }
     .container {
         padding: 20px 15px;
-        margin: 10px 5px; /* Небольшие отступы по бокам и сверху/снизу */
-        width: calc(100% - 10px); /* Учитываем padding body */
+        margin: 10px 5px;
+        width: calc(100% - 10px);
     }
     .gang-name { font-size: 1.9em; }
     .subtitle { font-size: 0.95em; margin-bottom: 25px;}
@@ -361,15 +384,23 @@ footer { /* Добавляем отступ для всего футера, чт
     .cta-sub-text { font-size: 1.05em; }
 
     .boosty-button {
-        padding: 12px 22px;
+        padding: 10px 20px; /* Скорректированы паддинги */
         font-size: 1em;
         width: 90%;
+        max-width: 300px;
     }
+    .boosty-button .button-icon.left-heart { margin-right: 6px; }
+    .boosty-button .button-icon.right-heart { margin-left: 6px; }
+    .boosty-button .button-icon svg {
+        width: 20px; /* Пример уменьшения на самых маленьких экранах */
+        height: 20px;
+    }
+
     .boosty-button.primary-action {
-        margin-top: 15px; /* Отступ для первой кнопки на мобильных */
+        margin-top: 15px;
     }
     .boosty-button.secondary-action {
-        margin-top: 20px; /* Отступ между кнопками на мобильных */
+        margin-top: 20px;
     }
     footer {
         margin-top: 20px;
