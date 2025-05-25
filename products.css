@@ -195,3 +195,174 @@
         height: 20px;
     }
 }
+
+/* products.css */
+
+/* ... (все ваши предыдущие стили для .product-container, .product-header, .product-list, .product-item и т.д. остаются) ... */
+
+.product-item {
+    /* ... существующие стили ... */
+    cursor: pointer; /* Указываем, что на товар можно нажать */
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+.product-item:hover {
+    transform: translateY(-5px) scale(1.01); /* Немного больше эффект при наведении */
+    box-shadow: 0 10px 25px rgba(var(--primary-color-rgb),0.2);
+    border-color: var(--primary-color);
+}
+
+.product-description-short { /* Новый стиль для краткого описания */
+    font-size: 0.9em;
+    color: #a0a0c0;
+    line-height: 1.4;
+    margin-top: 8px;
+}
+
+
+/* --- Стили для модальных окон --- */
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; /* Остается на месте при скролле */
+    z-index: 1000; /* Поверх всего остального */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Прокрутка, если контент не помещается */
+    background-color: rgba(0,0,0,0.6); /* Полупрозрачный фон */
+    backdrop-filter: blur(5px); /* Размытие фона под модальным окном */
+    -webkit-backdrop-filter: blur(5px);
+    opacity: 0; /* Начальная прозрачность для анимации */
+    transition: opacity 0.3s ease-in-out;
+}
+
+.modal.active { /* Класс для отображения модального окна */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--container-bg); /* Используем фон как у основного контейнера */
+    color: var(--text-color);
+    margin: auto;
+    padding: 30px 35px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 550px; /* Максимальная ширина модального окна */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    position: relative;
+    text-align: left;
+    transform: scale(0.95); /* Начальный размер для анимации */
+    transition: transform 0.3s ease-in-out;
+}
+
+.modal.active .modal-content {
+    transform: scale(1);
+}
+
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--primary-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    font-family: var(--font-header);
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+    text-align: center;
+}
+
+.modal-price {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #c0c0d8;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.modal-details {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #d0d0e0;
+    margin-bottom: 25px;
+    max-height: 200px; /* Ограничение высоты, если описание очень длинное */
+    overflow-y: auto; /* Прокрутка для длинного описания */
+    padding-right: 10px; /* Отступ для скроллбара */
+}
+/* Стилизация скроллбара (опционально) */
+.modal-details::-webkit-scrollbar {
+    width: 8px;
+}
+.modal-details::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
+.modal-details::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+.modal-details::-webkit-scrollbar-thumb:hover {
+    background: var(--button-hover);
+}
+
+
+.modal-buy-button, .modal-action-button {
+    display: block;
+    width: 100%;
+    background: linear-gradient(50deg, var(--primary-color), var(--button-hover));
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 600;
+    border-radius: 25px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.modal-buy-button:hover, .modal-action-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(var(--primary-color-rgb), 0.3);
+}
+
+/* Адаптивность для модальных окон */
+@media (max-width: 600px) {
+    .modal-content {
+        padding: 20px 25px;
+        width: 95%;
+    }
+    .modal-content h2 {
+        font-size: 1.6em;
+    }
+    .modal-price {
+        font-size: 1.15em;
+    }
+    .modal-details {
+        font-size: 0.95em;
+    }
+    .modal-buy-button, .modal-action-button {
+        padding: 12px 18px;
+        font-size: 1em;
+    }
+}
