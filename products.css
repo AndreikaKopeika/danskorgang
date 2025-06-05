@@ -447,3 +447,126 @@
     .modal-footer { padding: 15px 25px 20px 25px; }
     .modal-buy-button, .modal-action-button { padding: 12px 18px; font-size: 1.05em; }
 }
+
+
+/* --- Стили для НОВОГО МОДАЛЬНОГО ОКНА "ДЛЯ ЛОХОВ" --- */
+
+#newFeatureLohModal .modal-header h2 { /* Заголовок нового окна */
+    color: var(--primary-color); /* Или любой другой акцентный цвет */
+    text-align: center;
+    font-size: 1.8em;
+    padding-right: 0; /* Так как кнопка закрытия уже позиционирована */
+}
+
+.new-feature-modal-body {
+    display: flex;
+    align-items: center;
+    gap: 25px; /* Пространство между описанием и картинкой */
+    padding: 20px 30px 25px 30px !important; /* Важно, чтобы переопределить общий .modal-body padding */
+}
+
+.new-feature-description {
+    flex: 2; /* Описание занимает больше места */
+    text-align: left;
+}
+
+.new-feature-description h3 {
+    font-family: var(--font-header);
+    font-size: 1.3em;
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+.new-feature-description h3 strike {
+    opacity: 0.6;
+    font-weight: normal;
+}
+
+.new-feature-description p {
+    font-size: 0.95em;
+    color: #c5c5da;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.new-feature-image-container {
+    flex: 1; /* Картинка занимает меньше места */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color); /* Цвет иконки корзины */
+    opacity: 0.6;
+}
+
+.new-feature-image-container .fa-shopping-cart { /* Размер иконки */
+     font-size: 6em; /* fa-7x может быть слишком большим, подбери */
+}
+
+.new-feature-modal-footer {
+    display: flex;
+    gap: 15px; /* Пространство между кнопками */
+    justify-content: space-between; /* Кнопки по краям */
+     padding: 20px 30px 25px 30px !important;
+}
+
+.new-feature-modal-footer .modal-action-button {
+    width: auto; /* Чтобы кнопки не растягивались на всю ширину */
+    flex-grow: 1; /* Чтобы занимали равное доступное место */
+    padding: 12px 20px; /* Немного другие паддинги для этих кнопок */
+}
+
+.new-feature-modal-footer .modal-action-button.secondary {
+    background: linear-gradient(45deg, #555b6e, #404552); /* Темный/серый для обычной кнопки */
+    color: #e0e0e0;
+}
+
+.new-feature-modal-footer .modal-action-button.secondary:hover {
+    background: linear-gradient(45deg, #666c7e, #505562);
+    box-shadow: 0 6px 15px rgba(80, 85, 98, 0.3);
+}
+
+.new-feature-modal-footer .modal-action-button.primary.enticing {
+    /* Используем стили похожие на твою "блестящую" кнопку, но адаптированные */
+    background: linear-gradient(145deg, #ffc107, #ff8a00);
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2), 0 0 0 2px rgba(255,255,255,0.2) inset;
+}
+
+.new-feature-modal-footer .modal-action-button.primary.enticing:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 25px rgba(255,165,0,0.4), 0 0 0 2px rgba(255,255,255,0.3) inset;
+    background: linear-gradient(145deg, #ffca28, #ff9800);
+}
+
+/* Адаптация нового модального окна */
+@media (max-width: 600px) {
+    .new-feature-modal-body {
+        flex-direction: column-reverse; /* Картинка сверху, потом текст */
+        padding: 15px 20px 20px 20px !important;
+        gap: 15px;
+    }
+    #newFeatureLohModal .modal-header h2 {
+        font-size: 1.5em;
+    }
+    .new-feature-description h3 {
+        font-size: 1.15em;
+        text-align: center;
+    }
+     .new-feature-description p {
+        font-size: 0.9em;
+        text-align: center;
+    }
+    .new-feature-image-container .fa-shopping-cart {
+        font-size: 4.5em; /* Поменьше на мобильных */
+    }
+    .new-feature-modal-footer {
+        flex-direction: column; /* Кнопки друг под другом */
+        gap: 10px;
+        padding: 15px 20px 20px 20px !important;
+    }
+    .new-feature-modal-footer .modal-action-button {
+        width: 100%; /* Кнопки на всю ширину */
+    }
+}
