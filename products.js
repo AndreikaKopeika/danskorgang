@@ -2,14 +2,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const productItems = document.querySelectorAll('.product-item');
     const productModal = document.getElementById('productModal');
     const boostyInfoModal = document.getElementById('boostyInfoModal');
-    const closeButtons = document.querySelectorAll('.modal .close-button'); // Теперь ищем все кнопки закрытия в модалках
+    
+    // --- НОВОЕ: Получаем элементы нового модального окна ---
+    const newFeatureLohModal = document.getElementById('newFeatureLohModal');
+    const continueShoppingButton = document.getElementById('continueShoppingButton');
+    const tryNewLohFeatureButton = document.getElementById('tryNewLohFeatureButton');
+    // --- КОНЕЦ НОВОГО ---
+
+    const closeButtons = document.querySelectorAll('.modal .close-button');
 
     const modalProductNameElement = document.getElementById('modalProductName');
     const modalProductPriceElement = document.getElementById('modalProductPrice');
     const modalProductDetailsElement = document.getElementById('modalProductDetails');
     const buyProductButton = document.getElementById('buyProductButton');
 
-    let currentProductColorClass = ''; // Для хранения класса цвета
+    let currentProductColorClass = '';
 
     function openModal(modalElement) {
         if (modalElement) {
@@ -22,15 +29,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function closeModal(modalElement) {
-        if (modalElement) {
+        if (modalElement && modalElement.classList.contains('active')) { // Проверяем, что окно активно
             modalElement.classList.remove('active');
             setTimeout(() => {
                 modalElement.style.display = 'none';
-                // Сбрасываем класс цвета с заголовка при закрытии
                 if (modalElement === productModal && currentProductColorClass) {
                     modalProductNameElement.classList.remove(currentProductColorClass);
                 }
-            }, 350); // Длительность анимации из CSS
+            }, 350);
             document.body.style.overflow = 'auto';
         }
     }
@@ -40,25 +46,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const productName = this.dataset.name;
             const productPrice = this.dataset.price;
             const productDetails = this.dataset.details;
-            const productColorClass = this.dataset.colorClass; // Получаем класс цвета
+            const productColorClass = this.dataset.colorClass;
 
             modalProductNameElement.textContent = productName;
             modalProductPriceElement.textContent = productPrice;
             modalProductDetailsElement.innerHTML = productDetails.replace(/\n/g, '<br>');
 
-            // Удаляем предыдущий класс цвета, если он был
             if (currentProductColorClass) {
                 modalProductNameElement.classList.remove(currentProductColorClass);
             }
-            // Добавляем новый класс цвета и сохраняем его
             if (productColorClass) {
                 modalProductNameElement.classList.add(productColorClass);
                 currentProductColorClass = productColorClass;
             } else {
-                currentProductColorClass = ''; // Если класса нет, сбрасываем
+                currentProductColorClass = '';
             }
-
-
             openModal(productModal);
         });
     });
@@ -68,13 +70,12 @@ document.addEventListener('DOMContentLoaded', function() {
             closeModal(productModal);
             setTimeout(() => {
                 openModal(boostyInfoModal);
-            }, 370); // Чуть больше анимации закрытия
+            }, 370);
         });
     }
 
     closeButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // closest('.modal') найдет ближайший родительский элемент с классом .modal
             const modalToClose = this.closest('.modal');
             if (modalToClose) {
                 closeModal(modalToClose);
@@ -96,4 +97,29 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // --- НОВОЕ: Логика для модального окна "для лохов" ---
+    if (newFeatureLohModal) {
+        // Показываем модальное окно при загрузке страницы
+        // Можно добавить условие, чтобы не показывать каждый раз, например, с помощью sessionStorage
+        // if (!sessionStorage.getItem('lohFeatureModalShown')) {
+        //     openModal(newFeatureLohModal);
+        //     sessionStorage.setItem('lohFeatureModalShown', 'true');
+        // }
+        openModal(newFeatureLohModal); // Пока показываем всегда
+
+        if (continueShoppingButton) {
+            continueShoppingButton.addEventListener('click', function() {
+                closeModal(newFeatureLohModal);
+            });
+        }
+
+        if (tryNewLohFeatureButton) {
+            tryNewLohFeatureButton.addEventListener('click', function() {
+                // Действие для "Опробовать" - перенаправление на сайт "РазводЛохов"
+                window.location.href = 'https://andreikakopeika.github.io/RazvodLoxov/';
+            });
+        }
+    }
+    // --- КОНЕЦ НОВОГО ---
 });
