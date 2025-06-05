@@ -97,9 +97,22 @@
 
         .button-icon-sparkle {
             font-size: 1.2em;
-            opacity: 0.9;
             position: relative; 
-            z-index: 1;
+            z-index: 1; 
+            
+            /* Добавляем text-shadow для эффекта обводки */
+            /* Цвет тени (rgba(74, 46, 0, ...)) взят из цвета текста кнопки (#4A2E00) с разной прозрачностью */
+            /* Эта комбинация создает мягкую темную обводку */
+            text-shadow: 
+                -0.5px -0.5px 1px rgba(74, 46, 0, 0.3),  /* Вверх-влево */
+                 0.5px -0.5px 1px rgba(74, 46, 0, 0.3),  /* Вверх-вправо */
+                -0.5px  0.5px 1px rgba(74, 46, 0, 0.3),  /* Вниз-влево */
+                 0.5px  0.5px 1px rgba(74, 46, 0, 0.3),  /* Вниз-вправо */
+                 0px     0px   1px rgba(74, 46, 0, 0.2);   /* Легкое центральное затемнение для плотности */
+        
+            /* Обновляем анимацию */
+            animation: enhanced-sparkle-animation 1.8s infinite ease-in-out; 
+            /* Можно убрать opacity отсюда, если он полностью контролируется анимацией */
         }
 
         .left-sparkle {
@@ -110,9 +123,16 @@
             margin-left: 10px;
         }
 
+        /* Замени существующий @keyframes subtle-sparkle-animation на этот: */
         @keyframes subtle-sparkle-animation {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.15); opacity: 1; }
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.75; /* Начальная и конечная прозрачность */
+            }
+            50% {
+                transform: scale(1.25) rotate(8deg); /* Увеличиваем масштаб и добавляем вращение в середине анимации */
+                opacity: 1; /* Максимальная непрозрачность */
+            }
         }
 
         .button-icon-sparkle {
